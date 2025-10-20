@@ -4,22 +4,23 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Author;
+use Carbon\Carbon;
 
 class AuthorSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
+        $now = Carbon::now();
+
         $authors = [
-            ['name' => 'Agatha Christie'],
-            ['name' => 'Pramoedya Ananta Toer'],
-            ['name' => 'George Orwell'],
-            ['name' => 'J.K. Rowling'],
-            ['name' => 'Andrea Hirata'],
+            ['name' => 'Agatha Christie', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Pramoedya Ananta Toer', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'George Orwell', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'J.K. Rowling', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Andrea Hirata', 'created_at' => $now, 'updated_at' => $now],
         ];
 
-        foreach ($authors as $a) {
-            Author::create($a);
-        }
+        Author::insert($authors);
     }
 }
 
