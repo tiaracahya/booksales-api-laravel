@@ -5,6 +5,8 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\TransactionController;
+
 
 // =====================
 // TEST ROUTE
@@ -54,4 +56,22 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::post('/books', [BookController::class, 'store']);
     Route::put('/books/{id}', [BookController::class, 'update']);
     Route::delete('/books/{id}', [BookController::class, 'destroy']);
+
+});
+
+// =====================
+// TRANSACTION ROUTES
+// =====================
+
+// Untuk customer yang login
+Route::middleware(['auth:api', 'role:customer'])->group(function () {
+    Route::post('/transactions', [TransactionController::class, 'store']); // create
+    Route::get('/transactions/{id}', [TransactionController::class, 'show']); // show
+    Route::put('/transactions/{id}', [TransactionController::class, 'update']); // update
+});
+
+// Untuk admin
+Route::middleware(['auth:api', 'role:admin'])->group(function () {
+    Route::get('/transactions', [TransactionController::class, 'index']); // read all
+    Route::delete('/transactions/{id}', [TransactionController::class, 'destroy']); // delete
 });
